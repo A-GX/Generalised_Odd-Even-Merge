@@ -1,11 +1,9 @@
-use crate::*;
-
 use super::necessary_traits::CompareSwap;
 use std::cmp::min;
-use std::io::Result;
+//use std::io::Result;
 
-/// ###Execute the recursive odd-even merge :
-///  * We denote by "position" the index of an element in the original list, and by "index" the index of an element in
+/// ### Description
+///  * Here, we denote by "position" the index of an element in the original list, and by "index" the index of an element in
 /// the sub-list (i.e in when inside a recurisve step). To illustrate why this distinction is usefull : take an element at index 2 in 
 /// one of the recursive step, its actual position in the full list can perfectly be 7. In this case, the aforementionned element is
 /// considered to be an "even" element in the sub-list built for a recursive step on the "odd" elements of the intial list.
@@ -32,15 +30,48 @@ use std::io::Result;
 ///  * The formal proof of correctness can be found in our paper, "...." by ...
 /// 
 /// ### Parameters
-/// * list:&mut  T : mutable structure T. See example in main.rs
+/// * list:&mut  T => mutable structure T. See example in main.rs
 /// 
-/// * n_l: usize : length of the left sublist
-/// * s_l: usize : starting index of the left sublist
+/// * n_l: usize => length of the left sublist
+/// * s_l: usize => starting index of the left sublist
 /// 
-/// * n_r: usize : length of the right sublist
-/// * s_r: usize : starting indec of the right sublist
+/// * n_r: usize => length of the right sublist
+/// * s_r: usize => starting indec of the right sublist
 /// 
-/// * step: usize : necessary step to go from an element to the next one INSIDE the sublist (NOT IN BETWEEN SUBLISTS)
+/// * step: usize => necessary step to go from an element to the next one INSIDE the sublist (NOT IN BETWEEN SUBLISTS)
+/// 
+/// ### Example
+/// /!\ This example use the DataBase type defined for the example in the **necessary_traits** section /!\
+/// ```no_run
+/// use generalised-odd-even-merge::merge::odd_even_merge;
+/// use rand::Rng;
+/// 
+/// fn is_ordered(list: Vec<usize>) {
+///     let mut res = true;
+///     for i in 0..list.len()-1 {
+///         res = res && list[i] <= list [i+1];
+///     }
+///     assert!(res);
+/// }
+/// 
+/// let mut rng = rand::thread_rng();
+/// for j in 2..100 {
+///     for i in 0..j*j {
+///         let mut list = DataBase { row: (0..j).map(|_| rng.gen_range(0..1000)).collect() };
+///         let pivot: usize = rng.gen_range(0..j-1);
+///         println!("{:?}",list.row);
+/// 
+///         odd_even_merge_sort(&mut list, 0, pivot);
+///         odd_even_merge_sort(&mut list, pivot, j-pivot);
+///         print!("{:?} -- pivot: {}\n",list.row,pivot);
+/// 
+///         odd_even_merge(&mut list, pivot, j-pivot, 0, pivot, 1);
+/// 
+///         print!("{:?} -- i: {} - j: {}\n",list.row,i,j);
+///         is_ordered(list.row);
+///     }
+/// }
+/// ```
 pub fn odd_even_merge<T: CompareSwap>(list:&mut T, n_l: usize, n_r: usize, s_l: usize, s_r: usize, step: usize) {
     if (n_l >= 1 && n_r > 1) || (n_l > 1 && n_r >= 1) {
         let n_even_l = n_l/2 + min(1,n_l%2); // number of evens in the right sublist
@@ -54,7 +85,6 @@ pub fn odd_even_merge<T: CompareSwap>(list:&mut T, n_l: usize, n_r: usize, s_l: 
         
         let mut i = 1;
         loop {
-            print!("i = {:?} -  ",i);
             /* 
              * i is the number of comparison done. the len of the list is n_r+n_l,
              * and we need to do (n-1)/2 comparison (as we don't touch the first element)

@@ -1,10 +1,44 @@
-use crate::*;
-
 use super::merge::odd_even_merge;
 use super::necessary_traits::CompareSwap;
 use std::cmp::min;
 
-//Need to be verified
+/// ### Description
+/// Recursively sort a list using the generalised Odd-Even merging networg : split the initial list
+/// recursively until it obtains list of size 1 (hence sorted) and then feed those sorted list
+/// to the merging network.
+/// 
+/// ### Parameters
+/// * list:&mut  T -> mutable structure T. See example in main.rs
+/// 
+/// * start: usize => the starting index of the (sub-)list to sort. Initial value is usually 0
+/// * len: usize => the lenght of the (sub-)list to sort. Intitall value is usually list.len()
+/// 
+///  ### Example
+/// /!\ This example use the DataBase type defined for the example in the **necessary_traits** section /!\
+/// ```no_run
+/// use generalised-odd-even-merge::merge::odd_even_merge;
+/// use rand::Rng;
+/// 
+/// fn is_ordered(list: Vec<usize>) {
+///     let mut res = true;
+///     for i in 0..list.len()-1 {
+///         res = res && list[i] <= list [i+1];
+///     }
+///     assert!(res);
+/// }
+/// 
+/// let mut rng = rand::thread_rng();
+/// for j in 2..100 {
+///     for i in 0..j*j {
+///         let mut list = DataBase { row: (0..j).map(|_| rng.gen_range(0..1000)).collect() };
+///         println!("{:?}",list.row);
+///         odd_even_merge_sort(&mut list, 0, j);
+///         print!("{:?} -- i: {} - j: {}\n",list.row,i,j);
+///         is_ordered(list.row);
+///     }
+/// }
+/// 
+/// ```
 
 pub fn odd_even_merge_sort<T: CompareSwap>(db:&mut T, start: usize, len: usize) {
     if len > 1 {
@@ -22,24 +56,6 @@ pub fn odd_even_merge_sort<T: CompareSwap>(db:&mut T, start: usize, len: usize) 
         let n_l = len/2 + min(1,len%2); // in case we cannot divide by two, we want the longest one in right
         let n_r = len - n_l;
 
-        //println!("Merge {}", len);
-
         odd_even_merge(db, n_l, n_r, start, start+n_l, 1); 
-    }
-
-    // we always steop the recursion after calling on len = 1, so we will see everyone. 
-    else if ty == FEAT {
-        let mut test = db.rows[start].feat.eq(zero).reveal().expect("comparison failed").inner();
-        while test == 1 {
-            db.rows.remove(start);
-            if start<db.rows.len() {
-                test = db.rows[start].feat.eq(zero).reveal().expect("comparison failed").inner();
-            } else {
-                test = 0;
-            }
-        }
-        // Need to add offset to value here.
-        db.rows[start].feat = db.rows[start].feat-db.dist;
-        //println!("WARNING :: OFFSET NOT ADDED YET ! NOT SECURE !");
     }
 }
