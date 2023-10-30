@@ -1,4 +1,4 @@
-//! # Generalised Odd-Even Merge Algorithm
+//! # Generalised Odd-Even Merge Algorithm with constant memory
 //! 
 //! This is the official library (and implementation) of the research paper
 //! ["balbalbal" - Author1, Author2 - Jahr]. 
