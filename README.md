@@ -70,7 +70,7 @@ In the following, we describe how the algorithm work. Details exclusive to the w
 
 #### Parameters
 ``fn odd_even_merge<T: CompareSwap> ( list:&mut T, n_l: usize, n_r: usize, s_l: usize, s_r: usize, step: usize )``
-*   list:&mut T $\rightarrow$  mutable structure T. See example in main.rs
+*   list:&mut T $\rightarrow$  mutable structure T. See example in necessary\trait module
     
 *   n\_l: usize $\rightarrow$ length of the left sublist
     
@@ -131,7 +131,7 @@ Recursively sort a list using the generalised Odd-Even merging networg : split t
 #### Parameters
 ``fn odd_even_merge_sort<T: CompareSwap>( db:&mut T, start: usize, len: usize )``
 
-*   list:&mut T $\rightarrow$ mutable structure T. See example in main.rs
+*   list:&mut T $\rightarrow$ mutable structure T. See example in necessary\trait module
     
 *   start: usize $\rightarrow$ the starting index of the (sub-)list to sort. Initial value is usually 0
     
