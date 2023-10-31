@@ -6,9 +6,9 @@ Crate [generalised\_odd\_even\_merge]
 [Generalised Odd-Even Merge Algorithm with constant memory](#generalised-odd-even-merge-algorithm-with-constant-memory)
 -----------------------------------------------------------------------------------------------------------------------
 
-This is the official library (and implementation) of the research paper \[“balbalbal” - Author1, Author2 - Jahr\]. In case you need to use this library in an adversarial context, please refer to the abovementioned paper for the security proofs. This algorithm follows the description of Odd-Eve merging networks from the paper \[“Sorting Networks and their applications” - K. E. Batcher - 1968\] You can find the proof of correctness in our own paper (menntionned earlier).
+This is the official library (and implementation) of the research paper \[“balbalbal” - Author1, Author2 - Jahr\]. In case you need to use this library in an adversarial context, please refer to the above mentioned paper for the security proofs. This algorithm follows the description of Odd-Even merging networks from the paper \[“Sorting Networks and their applications” - K. E. Batcher - 1968\] You can find the proof of correctness in our own paper (mentionned earlier).
 
-You can find example for every functions and traits in their respective module descriptions.
+You can find example for every functions and trait in their respective module descriptions.
 
 [Modules](#modules)
 -------------------
@@ -35,7 +35,7 @@ pub struct DataBase {
     
 // (2) Implement the CompareSwap type for you structure
 impl CompareSwap for DataBase {
-    fn compare_swap(&mut self, a: usize, b: usize) -> std::io::Result<()> {
+    fn compare_swap(&mut self, a: usize, b: usize) $\rightarrow$ std::io::Result<()> {
         let cmp:usize = if self.row[a]>=self.row[b] {0} else {1};
         let tempo_a = self.row[a]*cmp + self.row[b]*(1-cmp);
         self.row[b] = self.row[b]*cmp + self.row[a]*(1-cmp);
@@ -53,11 +53,13 @@ impl CompareSwap for DataBase {
 
 In the following, we describe how the algorithm work. Details exclusive to the work by Batcher are not mentionned, please refer to “Sorting Networks and Applications” by Batcher, 1968.
 
-*   RECURSIVE RULES: The (sub-)list received by the function are of arbitrary length (i.e without any restriction on the slengths) l and r. We denote 3 possible situation when receiving the list :
+*   RECURSIVE RULES: The (sub-)lists received by the function are of arbitrary lengths (i.e without any restriction on the lengths) n_l and n_r. We denote 3 possible situation when receiving the lists :
     
-    1.  Both sub-list are of list 1 : we thus only need to compare-swap the two elements
-    2.  one sub-list is empty : we can stop here. Indeed, both list are considered to be correctly ordered at the start. The remaining list is thus ordered
-    3.  Both list are >= 1, and at least one is > 1. In this case, we need to proceed recursively on both sub-list : we thus compute the new strt punt and number of element for each four sub lists (odd and even sublists from the left and right sublists)
+    1.  Both sub-lists are of size 1 : we thus only need to compare-swap the two elements
+    2.  one sub-list is empty : we can stop here. Indeed, both lists are considered to be correctly ordered at the start. The remaining list is thus ordered.
+    3.  Both lists are $\ge$ 1, and at least one is > 1. In this case, we need to proceed recursively on both sub-list : we thus compute the new starting position and number of element for each four sub lists (odd and even sublists from the left and right sublists)   
+    <br />
+    
 *   RULES FOR 2 BY 2 COMPARISONS: Once again, we distinguish 3 possible cases :
     
     1.  Both elements we need to compare are in the left sub list : In this case, we just need to compareswap elemet at index i and i+1, which translates to elements at position s\_l + i\*steps and s\_l + (i+1)\*steps.
@@ -67,18 +69,18 @@ In the following, we describe how the algorithm work. Details exclusive to the w
     
 
 #### Parameters
-
-*   list:&mut T –> mutable structure T. See example in main.rs
+``fn odd_even_merge<T: CompareSwap> ( list:&mut T, n_l: usize, n_r: usize, s_l: usize, s_r: usize, step: usize )``
+*   list:&mut T $\rightarrow$  mutable structure T. See example in main.rs
     
-*   n\_l: usize –> length of the left sublist
+*   n\_l: usize $\rightarrow$ length of the left sublist
     
-*   s\_l: usize –> starting index of the left sublist
+*   s\_l: usize $\rightarrow$ starting index of the left sublist
     
-*   n\_r: usize –> length of the right sublist
+*   n\_r: usize $\rightarrow$ length of the right sublist
     
-*   s\_r: usize –> starting indec of the right sublist
+*   s\_r: usize $\rightarrow$ starting indec of the right sublist
     
-*   step: usize –> necessary step to go from an element to the next one INSIDE the sublist (NOT IN BETWEEN SUBLISTS)
+*   step: usize $\rightarrow$ necessary step to go from an element to the next one INSIDE the sublist (NOT IN BETWEEN SUBLISTS)
     
 
 #### Example
@@ -127,12 +129,13 @@ fn main () {
 Recursively sort a list using the generalised Odd-Even merging networg : split the initial list recursively until it obtains list of size 1 (hence sorted) and then feed those sorted list to the merging network.
 
 #### Parameters
+``fn odd_even_merge_sort<T: CompareSwap>( db:&mut T, start: usize, len: usize )``
 
-*   list:&mut T -> mutable structure T. See example in main.rs
+*   list:&mut T $\rightarrow$ mutable structure T. See example in main.rs
     
-*   start: usize => the starting index of the (sub-)list to sort. Initial value is usually 0
+*   start: usize $\rightarrow$ the starting index of the (sub-)list to sort. Initial value is usually 0
     
-*   len: usize => the lenght of the (sub-)list to sort. Intitall value is usually list.len()
+*   len: usize $\rightarrow$ the lenght of the (sub-)list to sort. Intitall value is usually list.len()
     
 
 #### Example
