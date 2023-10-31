@@ -95,22 +95,27 @@ fn is_ordered(list: Vec<usize>) {
     }
     assert!(res);
 }
-    
-let mut rng = rand::thread_rng();
-for j in 2..100 {
-    for i in 0..j*j {
-        let mut list = DataBase { row: (0..j).map(|_| rng.gen_range(0..1000)).collect() };
-        let pivot: usize = rng.gen_range(0..j-1);
-        println!("{:?}",list.row);
-    
-        odd_even_merge_sort(&mut list, 0, pivot);
-        odd_even_merge_sort(&mut list, pivot, j-pivot);
-        print!("{:?} -- pivot: {}\n",list.row,pivot);
-    
-        odd_even_merge(&mut list, pivot, j-pivot, 0, pivot, 1);
-    
-        print!("{:?} -- i: {} - j: {}\n",list.row,i,j);
-        is_ordered(list.row);
+
+fn main () {
+    let mut rng = rand::thread_rng();
+    for j in 2..100 {
+        for i in 0..j*j {
+            // Generate random list
+            let mut list = DataBase { row: (0..j).map(|_| rng.gen_range(0..1000)).collect() };
+            println!("{:?}",list.row);
+
+            // make the list into two ordered list of random size
+            let pivot: usize = rng.gen_range(0..j-1);
+            odd_even_merge_sort(&mut list, 0, pivot);
+            odd_even_merge_sort(&mut list, pivot, j-pivot);
+            print!("{:?} -- pivot: {}\n",list.row,pivot);
+
+            // merge the two list of random sizes
+            odd_even_merge(&mut list, pivot, j-pivot, 0, pivot, 1);
+
+            print!("{:?} -- i: {} - j: {}\n",list.row,i,j);
+            is_ordered(list.row);
+        }
     }
 }
 ```
@@ -144,15 +149,21 @@ fn is_ordered(list: Vec<usize>) {
     }
     assert!(res);
 }
-    
-let mut rng = rand::thread_rng();
-for j in 2..100 {
-    for i in 0..j*j {
-        let mut list = DataBase { row: (0..j).map(|_| rng.gen_range(0..1000)).collect() };
-        println!("{:?}",list.row);
-        odd_even_merge_sort(&mut list, 0, j);
-        print!("{:?} -- i: {} - j: {}\n",list.row,i,j);
-        is_ordered(list.row);
+
+fn main () {
+    let mut rng = rand::thread_rng();
+    for j in 2..100 {
+        for i in 0..j*j {
+            // Generate a random list
+            let mut list = DataBase { row: (0..j).map(|_| rng.gen_range(0..1000)).collect() };
+            println!("{:?}",list.row);
+            
+            // order the list
+            odd_even_merge_sort(&mut list, 0, j);
+
+            print!("{:?} -- i: {} - j: {}\n",list.row,i,j);
+            is_ordered(list.row);
+        }
     }
 }
 ```
