@@ -8,7 +8,7 @@ Crate [generalised\_odd\_even\_merge]
 
 This is the official library (and implementation) of the research paper \[“balbalbal” - Author1, Author2 - Jahr\]. In case you need to use this library in an adversarial context, please refer to the abovementioned paper for the security proofs. This algorithm follows the description of Odd-Eve merging networks from the paper \[“Sorting Networks and their applications” - K. E. Batcher - 1968\] You can find the proof of correctness in our own paper (menntionned earlier).
 
-You can find example linked to every functions and traits in the respective sections.
+You can find example for every functions and traits in their respective module descriptions.
 
 [Modules](#modules)
 -------------------
@@ -83,7 +83,7 @@ In the following, we describe how the algorithm work. Details exclusive to the w
 
 #### Example
 
-**/!\\** This example use the DataBase type defined for the example in the _**necessary\_traits**_ section **/!\\**
+**/!\\** This example use the DataBase type defined for the example in the _**necessary\_traits**_ module description **/!\\**
 ```rs 
 use generalised-odd-even-merge::merge::odd_even_merge;
 use rand::Rng;
@@ -137,7 +137,7 @@ Recursively sort a list using the generalised Odd-Even merging networg : split t
 
 #### Example
 
-**/!\\** This example use the DataBase type defined for the example in the _**necessary\_traits**_ section **/!\\**
+**/!\\** This example use the DataBase type defined for the example in the _**necessary\_traits**_ module description **/!\\**
 ```rs
 use generalised-odd-even-merge::merge::odd_even_merge;
 use rand::Rng;
