@@ -51,23 +51,6 @@ impl CompareSwap for DataBase {
 
 *   Here, we denote by “position” the index of an element in the original list, and by “index” the index of an element in the sub-list (i.e in when inside a recurisve step). To illustrate why this distinction is usefull : take an element at index 2 in one of the recursive step, its actual position in the full list can perfectly be 7. In this case, the aforementionned element is considered to be an “even” element in the sub-list built for a recursive step on the “odd” elements of the intial list.
 
-In the following, we describe how the algorithm work. Details exclusive to the work by Batcher are not mentionned, please refer to “Sorting Networks and Applications” by Batcher, 1968.
-
-*   RECURSIVE RULES: The (sub-)lists received by the function are of arbitrary lengths (i.e without any restriction on the lengths) n_l and n_r. We denote 3 possible situation when receiving the lists :
-    
-    1.  Both sub-lists are of size 1 : we thus only need to compare-swap the two elements
-    2.  one sub-list is empty : we can stop here. Indeed, both lists are considered to be correctly ordered at the start. The remaining list is thus ordered.
-    3.  Both lists are $\ge$ 1, and at least one is > 1. In this case, we need to proceed recursively on both sub-list : we thus compute the new starting position and number of element for each four sub lists (odd and even sublists from the left and right sublists)   
-    <br />
-    
-*   RULES FOR 2 BY 2 COMPARISONS: Once again, we distinguish 3 possible cases :
-    
-    1.  Both elements we need to compare are in the left sub list : In this case, we just need to compareswap elemet at index i and i+1, which translates to elements at position s\_l + i\*steps and s\_l + (i+1)\*steps.
-    2.  First element we need to compare is the last element of left sub list, second element is the first element of right sublist : in this case, we just need to compare element at position s\_l + i\*steps and s\_r
-    3.  Both elements are in the right sub list : in this case, we need to compare\_swap element at index i and i+1, which translates in comparing elements at position s\_r +(i-n\_l)\*steps and s\_r + (i-n\_l +1)\*steps
-*   The formal proof of correctness can be found in our paper, “….” by …
-    
-
 #### Parameters
 ``fn odd_even_merge<T: CompareSwap> ( list:&mut T, n_l: usize, n_r: usize, s_l: usize, s_r: usize, step: usize )``
 *   list:&mut T $\rightarrow$  mutable structure T. See example in necessary\trait module
