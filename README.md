@@ -51,6 +51,7 @@ impl CompareSwap for DataBase {
 
 *   Here, we denote by “position” the index of an element in the original list, and by “index” the index of an element in the sub-list (i.e in when inside a recurisve step). To illustrate why this distinction is usefull : take an element at index 2 in one of the recursive step, its actual position in the full list can perfectly be 7. In this case, the aforementionned element is considered to be an “even” element in the sub-list built for a recursive step on the “odd” elements of the intial list.
 
+
 #### Parameters
 ``fn odd_even_merge<T: CompareSwap> ( list:&mut T, n_l: usize, n_r: usize, s_l: usize, s_r: usize, step: usize )``
 *   list:&mut T $\rightarrow$  mutable structure T. See example in necessary\trait module
