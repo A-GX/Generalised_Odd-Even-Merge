@@ -6,7 +6,7 @@ Crate [generalised\_odd\_even\_merge]
 [Generalised Odd-Even Merge Algorithm with constant memory](#generalised-odd-even-merge-algorithm-with-constant-memory)
 -----------------------------------------------------------------------------------------------------------------------
 
-This is the official library (and implementation) of the research paper **\[“Odd-Even Merging Network: a Software Implementation for Arbitrary Lengths” - Antoine Gansel - Sept/Oct 2024\]**. This algorithm follows the description of Odd-Even merging networks from the paper \[“Sorting Networks and their applications” - K. E. Batcher - 1968\] You can find the proof of correctness in our own paper (mentionned earlier).
+This is the official library (and implementation) of the paper **\[“Odd-Even Merging Network: a Software Implementation for Arbitrary Lengths” - Antoine Gansel\]**. This algorithm follows the description of Odd-Even merging networks from the paper \[“Sorting Networks and their applications” - K. E. Batcher - 1968\] You can find the proof of correctness in our own paper (mentionned earlier).
 
 You can find example for every functions and trait in their respective module descriptions.
 
